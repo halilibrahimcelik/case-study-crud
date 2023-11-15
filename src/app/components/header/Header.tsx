@@ -4,21 +4,24 @@ import Link from "next/link";
 import React from "react";
 import CustomButon from "./button";
 import { usePathname } from "next/navigation";
+import MobileHeader from "./mobileHeader";
+import { useCycle } from "framer-motion";
 type Props = {};
 
 const Header = (props: Props) => {
   const pathname = usePathname();
-  console.log(pathname);
+  const [isOpen, toggleOpen] = useCycle(false, true);
+
   return (
     <header className="py-10">
       <Wrapper component="nav">
-        <ul className="flex justify-between items-center">
-          <li className="opacity-100 hover:opacity-75 duration-300 ease-in transition-opacity">
+        <ul className="  justify-between items-center flex">
+          <li className="opacity-100    bg-transparent hover:opacity-75 duration-300 ease-in transition-opacity">
             <Link href={"/"}>
-              <h1 className="text-2xl lg:text-3xl xl:text-4xl">Acme</h1>
+              <h1 className="text-3xl  lg:text-4xl xl:text-5xl">Acme</h1>
             </Link>
           </li>
-          <li>
+          <li className="hidden lg:block">
             <ul className="flex gap-4 justify-between items-center">
               <li
                 className={
@@ -41,7 +44,7 @@ const Header = (props: Props) => {
               </li>
             </ul>
           </li>
-          <li>
+          <li className="hidden lg:block">
             <ul className="flex gap-2 justify-between items-center">
               <li className="">
                 <CustomButon
@@ -58,6 +61,9 @@ const Header = (props: Props) => {
                 />
               </li>
             </ul>
+          </li>
+          <li className="block lg:hidden">
+            <MobileHeader />
           </li>
         </ul>
       </Wrapper>
