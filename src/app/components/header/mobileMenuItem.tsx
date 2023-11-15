@@ -26,8 +26,8 @@ export const MobileMenuItem = ({ children }: Props) => {
     <motion.li
       variants={variants}
       whileHover={{ scale: 1.1 }}
-      //   whileTap={{ scale: 0.95 }}
-      className=" border flex justify-center py-2  w-full"
+      whileTap={{ scale: 0.95 }}
+      className="flex justify-center flex-col  py-2 text-xl  md:text-2xl  "
     >
       {children}
     </motion.li>

@@ -5,12 +5,10 @@ import React from "react";
 import CustomButon from "./button";
 import { usePathname } from "next/navigation";
 import MobileHeader from "./mobileHeader";
-import { useCycle } from "framer-motion";
 type Props = {};
 
 const Header = (props: Props) => {
   const pathname = usePathname();
-  const [isOpen, toggleOpen] = useCycle(false, true);
 
   return (
     <header className="py-10">

@@ -5,6 +5,7 @@ import HamburgerToggle from "./hamburgerToggle";
 import Link from "next/link";
 import CustomButon from "./button";
 import { MobileMenuItem } from "./mobileMenuItem";
+
 type Props = {};
 
 const useDimensions = (ref: any) => {
@@ -25,15 +26,15 @@ const sidebar = {
     clipPath: `circle(${height * 2 + 200}px at 100% 0)`,
     transition: {
       type: "spring",
-      stiffness: 20,
-      restDelta: 2,
+      stiffness: 15,
+      restDelta: 10,
     },
   }),
   closed: {
     clipPath: "circle(0px at 100% 0)",
     transition: {
       type: "spring",
-      stiffness: 400,
+      stiffness: 200,
       damping: 40,
     },
   },
@@ -78,10 +79,9 @@ const MobileHeader = (props: Props) => {
       ref={containerRef}
     >
       <motion.div
-        className="absolute inset-0 top-0 right-0 h-[50vh] w-full bg-slate-200 "
+        className="absolute inset-0 top-0 right-0 h-[60vh] w-full bg-gradient-to-b  from-[#ffcb13] from-10% to-[#ccc6f52c] to-90%    "
         variants={sidebar}
       >
-        <h1 className="text-black">hello</h1>
         <motion.ul
           variants={variants}
           className="flex flex-col items-center justify-center h-full w-full gap-4"
