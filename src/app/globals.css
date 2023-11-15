@@ -5,3 +5,12 @@
 body {
   font-family: var(--font-nunito);
 }
+
+@layer components {
+  .link {
+    @apply text-gray  transition-all duration-300 ease-in  hover:brightness-[10%];
+  }
+  .link-active {
+    @apply brightness-[10%];
+  }
+}
