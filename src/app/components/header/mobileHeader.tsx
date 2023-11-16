@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { motion, useCycle } from "framer-motion";
 import HamburgerToggle from "./hamburgerToggle";
 import Link from "next/link";
-import CustomButon from "./button";
+import CustomButon from "../UI/button";
 import { MobileMenuItem } from "./mobileMenuItem";
 
 type Props = {};
@@ -79,7 +79,7 @@ const MobileHeader = (props: Props) => {
       ref={containerRef}
     >
       <motion.div
-        className="absolute inset-0 top-0 right-0 h-[60vh] w-full bg-gradient-to-b  from-[#ffcc13b0] from-10% to-[#ccc6f52c] to-90%    "
+        className="absolute inset-0 top-0  z-10 right-0 h-[60vh] w-full bg-gradient-to-b  from-[#ffcc13c6] from-10% to-[#ccc6f5e2] to-90%    "
         variants={sidebar}
       >
         <motion.ul

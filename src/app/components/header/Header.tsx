@@ -2,7 +2,7 @@
 import Wrapper from "@/app/components/UI/Wrapper";
 import Link from "next/link";
 import React from "react";
-import CustomButon from "./button";
+import CustomButon from "../UI/button";
 import { usePathname } from "next/navigation";
 import MobileHeader from "./mobileHeader";
 import { motion } from "framer-motion";
@@ -55,6 +55,7 @@ const Header = (props: Props) => {
                   text="Oturum Aç"
                   color="primary"
                   variant="outlined"
+                  customClass="font-medium"
                 />
               </li>
               <li className="">
@@ -62,6 +63,7 @@ const Header = (props: Props) => {
                   text="Ücretsiz Dene"
                   color="primary"
                   variant="contained"
+                  customClass="font-medium"
                 />
               </li>
             </ul>

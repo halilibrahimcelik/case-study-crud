@@ -14,9 +14,10 @@ type Props = {
     | "info"
     | "warning"
     | undefined;
+  customClass?: string;
 };
 
-const CustomButon = ({ variant, text, color }: Props) => {
+const CustomButon = ({ variant, text, color, customClass }: Props) => {
   const theme = useMemo(
     () =>
       createTheme({
@@ -25,13 +26,21 @@ const CustomButon = ({ variant, text, color }: Props) => {
             main: "#111",
             light: "#999",
           },
+          secondary: {
+            main: "#5B44F3",
+          },
         },
       }),
     []
   );
   return (
     <ThemeProvider theme={theme}>
-      <Button sx={{ textTransform: "none" }} variant={variant} color={color}>
+      <Button
+        className={customClass}
+        sx={{ textTransform: "none" }}
+        variant={variant}
+        color={color}
+      >
         {text}
       </Button>
     </ThemeProvider>
