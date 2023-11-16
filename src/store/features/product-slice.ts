@@ -20,7 +20,7 @@ export const fetchProducsList = createAsyncThunk(
     if (response.status !== 200) {
       throw new Error(data.message);
     }
-    if (response.ok) return data.products;
+    if (response.ok) return data?.products;
   }
 );
 export const productSlice = createSlice({
