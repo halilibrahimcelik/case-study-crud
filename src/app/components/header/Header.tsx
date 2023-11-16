@@ -5,13 +5,19 @@ import React from "react";
 import CustomButon from "./button";
 import { usePathname } from "next/navigation";
 import MobileHeader from "./mobileHeader";
+import { motion } from "framer-motion";
 type Props = {};
 
 const Header = (props: Props) => {
   const pathname = usePathname();
 
   return (
-    <header className="py-10">
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4, ease: "easeIn" }}
+      className="py-10"
+    >
       <Wrapper component="nav">
         <ul className="  justify-between items-center flex">
           <li className="opacity-100    bg-transparent hover:opacity-75 duration-300 ease-in transition-opacity">
@@ -65,7 +71,7 @@ const Header = (props: Props) => {
           </li>
         </ul>
       </Wrapper>
-    </header>
+    </motion.header>
   );
 };
 
