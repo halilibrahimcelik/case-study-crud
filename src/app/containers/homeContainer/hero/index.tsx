@@ -27,7 +27,7 @@ const HeroSection = (props: Props) => {
         <p className="text-base md:text-lg  xl:text-xl">
           Acme ile hedeflediğiniz kitleye videolar aracılığıyla ulaşın. Tek
           hamlede binlerce kullanıcıdan zahmetsizce bilgi alın. Maliyetlerinizi
-          azaltın, müşteri memnuniyetini ve satışlarınızı artırın
+          azaltın, müşteri memnuniyetini ve satışlarınızı artırın.
         </p>
 
         <p className="text-base md:text-lg  xl:text-xl">
