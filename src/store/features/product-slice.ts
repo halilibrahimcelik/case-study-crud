@@ -29,10 +29,11 @@ export const productSlice = createSlice({
   reducers: {
     updateProduct: (state, action) => {
       const { id, ...updatedProduct }: Products = action.payload;
-      let selectedProduct = state.products.find((product) => product.id === id);
-      if (selectedProduct) {
-        selectedProduct = { id, ...updatedProduct };
-      }
+      const updatedProducts = state.products.map((product) =>
+        product.id === id ? { ...product, ...updatedProduct } : product
+      );
+
+      return { ...state, products: updatedProducts };
     },
     deleteProduct: (state, action) => {
       const { id } = action.payload;

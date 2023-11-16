@@ -1,4 +1,5 @@
 "use client";
+import Wrapper from "@/app/components/UI/Wrapper";
 import {
   fetchProducsList,
   getProductList,
@@ -6,6 +7,8 @@ import {
 import { useAppDispatch } from "@/store/store";
 import React, { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
+import SearchForm from "./searchProduct";
+import AddProduct from "./addProduct";
 
 type Props = {};
 
@@ -25,9 +28,12 @@ const ProductContainer = (props: Props) => {
 
   console.log(productList);
   return (
-    <>
-      <div>ProductContainer</div>
-    </>
+    <Wrapper component="section">
+      <div className="grid grid-col-1 md:grid-col-2">
+        <AddProduct />
+        <SearchForm />
+      </div>
+    </Wrapper>
   );
 };
 
