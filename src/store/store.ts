@@ -10,7 +10,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const store = configureStore({
   reducer: {
-    product: productSlice,
+    products: productSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });
