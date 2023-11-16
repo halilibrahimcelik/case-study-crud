@@ -2,7 +2,7 @@
 import Wrapper from "@/app/components/UI/Wrapper";
 import Link from "next/link";
 import React from "react";
-import CustomButon from "./button";
+import CustomButon from "../UI/button";
 import { usePathname } from "next/navigation";
 import MobileHeader from "./mobileHeader";
 import { motion } from "framer-motion";
