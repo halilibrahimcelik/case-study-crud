@@ -9,11 +9,17 @@ import StarRateIcon from "@mui/icons-material/StarRate";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import CategoryIcon from "@mui/icons-material/Category";
 import CustomButon from "@/app/components/UI/button";
-type Props = {};
+type Props = {
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+};
 
-const FormModal = (props: Props) => {
+const FormModal = ({ handleSubmit }: Props) => {
   return (
-    <Box component={"form"} className="w-full flex flex-col gap-3">
+    <Box
+      onSubmit={handleSubmit}
+      component={"form"}
+      className="w-full flex flex-col gap-3"
+    >
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
         <SubtitlesIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
         <TextField
@@ -30,7 +36,6 @@ const FormModal = (props: Props) => {
         <Textarea
           className="w-full"
           required
-          contentEditable="true"
           name="description"
           id="input-description"
           placeholder="Ürün Açıklaması"

@@ -9,6 +9,7 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FormModal from "../formModal";
+import { addProduct } from "@/store/features/product-slice";
 
 const style = {
   position: "absolute" as "absolute",
@@ -17,7 +18,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+
   boxShadow: 24,
   p: 4,
 };
@@ -29,7 +30,13 @@ const AddProduct = (props: Props) => {
   const handleClose = () => setOpen(false);
 
   const dispatch = useAppDispatch();
-  const handleAddProduct = () => {};
+  const handleAddProduct = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    dispatch(addProduct({ productInfo: data }));
+    console.log(data);
+  };
   return (
     <>
       <CustomButon
@@ -54,7 +61,7 @@ const AddProduct = (props: Props) => {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <FormModal />
+            <FormModal handleSubmit={handleAddProduct} />
           </Box>
         </Fade>
       </Modal>

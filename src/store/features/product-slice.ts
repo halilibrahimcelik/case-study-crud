@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Products } from "@/lib/types";
+import placeholderImage from "@/assets/default-product-image.png";
 interface ProductState {
   products: Products[];
   loading: boolean;
@@ -43,8 +44,15 @@ export const productSlice = createSlice({
       state.products = updatedProducts;
     },
     addProduct: (state, action) => {
-      const { id, ...product }: Products = action.payload;
-      state.products.push({ id, ...product });
+      const { productInfo } = action.payload;
+      const randomId = Math.floor(Math.random() * 1000) + 1;
+      const newProduct = {
+        id: randomId,
+        thumbnail: placeholderImage.src,
+        ...productInfo,
+      };
+      console.log(newProduct);
+      state.products.unshift(newProduct);
     },
   },
   extraReducers: (builder) => {
