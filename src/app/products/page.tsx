@@ -1,9 +1,19 @@
+import { Metadata } from "next";
 import React from "react";
+import ProductContainer from "../containers/productContainer";
+import StoreProvider from "@/store/Provider";
 
 type Props = {};
-
+export const metadata: Metadata = {
+  title: "Acme | Products",
+  description: "Producst of Acme Company",
+};
 const ProductPage = (props: Props) => {
-  return <div>ProductPage</div>;
+  return (
+    <StoreProvider>
+      <ProductContainer />
+    </StoreProvider>
+  );
 };
 
 export default ProductPage;
