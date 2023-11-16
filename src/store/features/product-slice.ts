@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Products } from "@/lib/types";
 import placeholderImage from "@/assets/default-product-image.png";
+import { stat } from "fs";
 interface ProductState {
   products: Products[];
   loading: boolean;
@@ -24,6 +25,29 @@ export const fetchProducsList = createAsyncThunk(
     if (response.ok) return data?.products;
   }
 );
+export const addProduct = createAsyncThunk(
+  "products/addProduct",
+  async ({ productInfo }: any, thunkAPI) => {
+    const randomId = Math.floor(Math.random() * 1000) + 1;
+    const newProduct = {
+      id: randomId,
+      thumbnail: placeholderImage.src,
+      ...productInfo,
+    };
+
+    // Simulate loading
+    thunkAPI.dispatch(productSlice.actions.setLoading(true));
+
+    // Simulate asynchronous operation
+    await new Promise((resolve) => setTimeout(resolve, 700));
+
+    // Update the state with the new product
+    thunkAPI.dispatch(productSlice.actions.addProductSuccess(newProduct));
+
+    // Set loading to false
+    thunkAPI.dispatch(productSlice.actions.setLoading(false));
+  }
+);
 export const productSlice = createSlice({
   name: "products",
   initialState,
@@ -43,16 +67,11 @@ export const productSlice = createSlice({
       );
       state.products = updatedProducts;
     },
-    addProduct: (state, action) => {
-      const { productInfo } = action.payload;
-      const randomId = Math.floor(Math.random() * 1000) + 1;
-      const newProduct = {
-        id: randomId,
-        thumbnail: placeholderImage.src,
-        ...productInfo,
-      };
-      console.log(newProduct);
-      state.products.unshift(newProduct);
+    addProductSuccess: (state, action) => {
+      state.products.unshift(action.payload);
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -71,7 +90,7 @@ export const productSlice = createSlice({
       });
   },
 });
-export const { updateProduct, deleteProduct, addProduct } =
+export const { updateProduct, deleteProduct, addProductSuccess } =
   productSlice.actions;
 
 export const getProductList = (state: ProductState) => state.products;
