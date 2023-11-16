@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import PhoneBanner from "@/assets/phone-banner.svg";
@@ -5,12 +6,18 @@ import CustomButon from "@/app/components/UI/button";
 import BottomCorner from "@/assets/corner-bottom.svg";
 import TopCorner from "@/assets/corner-top.svg";
 import CircleYellow from "@/assets/circle-yellow.svg";
+import { motion } from "framer-motion";
 type Props = {};
 
 const HeroSection = (props: Props) => {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-3 py-10 gap-10">
-      <div className="content p-4 relative lg:col-span-2  flex flex-col gap-4">
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.3 }}
+        className="content p-4 relative lg:col-span-2  flex flex-col gap-4"
+      >
         <h1 className=" leading-snug xl:leading-normal  text-[2.5rem]  md:text-[3rem]  lg:text-[3.8rem] font-bold">
           İşinizi Güçlendirecek <br /> Videolar
         </h1>
@@ -55,8 +62,13 @@ const HeroSection = (props: Props) => {
           alt="circle-yellow"
           className="hidden absolute sm:block top-10 right-10 lg:right-[unset]  lg:top-40 lg:left-[-40px]"
         />
-      </div>
-      <div className="flex items-center justify-center lg:justify-end">
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.7, duration: 0.3 }}
+        className="flex items-center justify-center lg:justify-end"
+      >
         <Image
           src={PhoneBanner}
           alt="acme-phone-banner"
@@ -66,7 +78,7 @@ const HeroSection = (props: Props) => {
           placeholder="blur"
           blurDataURL="@/assets/phone-banner.svg"
         />
-      </div>
+      </motion.div>
     </section>
   );
 };

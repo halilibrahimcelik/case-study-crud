@@ -55,6 +55,7 @@ const Header = (props: Props) => {
                   text="Oturum Aç"
                   color="primary"
                   variant="outlined"
+                  customClass="font-medium"
                 />
               </li>
               <li className="">
@@ -62,6 +63,7 @@ const Header = (props: Props) => {
                   text="Ücretsiz Dene"
                   color="primary"
                   variant="contained"
+                  customClass="font-medium"
                 />
               </li>
             </ul>
