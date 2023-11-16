@@ -75,11 +75,11 @@ const MobileHeader = (props: Props) => {
       initial={false}
       animate={isOpen ? "open" : "closed"}
       custom={height}
-      className={` w-full lg:hidden ${isOpen ? "" : "pointer-events-none"}`}
+      className={` w-fit lg:hidden ${isOpen ? "" : "pointer-events-none"}`}
       ref={containerRef}
     >
       <motion.div
-        className="absolute inset-0 top-0 right-0 h-[60vh] w-full bg-gradient-to-b  from-[#ffcb13] from-10% to-[#ccc6f52c] to-90%    "
+        className="absolute inset-0 top-0 right-0 h-[60vh] w-full bg-gradient-to-b  from-[#ffcc13b0] from-10% to-[#ccc6f52c] to-90%    "
         variants={sidebar}
       >
         <motion.ul
