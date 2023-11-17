@@ -72,7 +72,7 @@ const HeroSection = (props: Props) => {
         <Image
           src={PhoneBanner}
           alt="acme-phone-banner"
-          className="w-auto h-auto"
+          className="w-full  md:w-auto md:h-auto "
           unoptimized
           objectFit="cover"
           placeholder="blur"
