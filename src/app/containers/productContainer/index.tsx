@@ -15,6 +15,7 @@ import Spinner from "@/app/components/spinner";
 import { Products } from "@/lib/types";
 import { Pagination } from "@mui/material";
 import ProductTheme from "./customTheme";
+import { AnimatePresence, motion } from "framer-motion";
 type Props = {};
 
 const ProductContainer = (props: Props) => {
@@ -41,6 +42,14 @@ const ProductContainer = (props: Props) => {
   const handlePageChange = (event: React.ChangeEvent<any>, newPage: number) => {
     setPage(newPage);
   };
+  const variants = {
+    open: {
+      transition: { staggerChildren: 0.5, delayChildren: 0.5 },
+    },
+    closed: {
+      transition: { staggerChildren: 0.05, staggerDirection: -1 },
+    },
+  };
   return (
     <Wrapper component="section">
       <div className="py-5 grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -53,15 +62,22 @@ const ProductContainer = (props: Props) => {
             <Spinner />
           ) : (
             <>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                {productList.length === 0 && loadingStatus ? (
-                  <p>Şu an gösterilecek bir ürün bulunmamaktadır</p>
-                ) : (
-                  displayedProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))
-                )}
-              </ul>
+              <AnimatePresence>
+                <motion.ul
+                  animate={variants.open}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-5"
+                >
+                  {productList.length === 0 && loadingStatus ? (
+                    <li>
+                      <p>Şu an gösterilecek bir ürün bulunmamaktadır</p>
+                    </li>
+                  ) : (
+                    displayedProducts.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))
+                  )}
+                </motion.ul>
+              </AnimatePresence>
               {productList.length > 6 && (
                 <div className="flex py-5 justify-center w-full">
                   <Pagination

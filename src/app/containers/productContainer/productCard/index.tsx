@@ -4,14 +4,12 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, Chip } from "@mui/material";
-import SubtitlesIcon from "@mui/icons-material/Subtitles";
-import DescriptionIcon from "@mui/icons-material/Description";
 import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import CategoryIcon from "@mui/icons-material/Category";
 import Image from "next/image";
-
+import { motion } from "framer-motion";
 type Props = {
   product: Products;
 };
@@ -19,8 +17,28 @@ type Props = {
 const ProductCard = ({ product }: Props) => {
   const { title, brand, description, thumbnail, category, price, rating } =
     product;
+  const variants = {
+    open: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        y: { stiffness: 10, velocity: -100 },
+      },
+    },
+    closed: {
+      y: 0,
+      opacity: 0,
+      transition: {
+        y: { stiffness: 1000 },
+      },
+    },
+  };
   return (
-    <li className="flex justify-center">
+    <motion.li
+      initial={variants.closed}
+      animate={variants.open}
+      className="flex justify-center"
+    >
       <Card className="w-full sm:max-w-[32rem] ">
         <CardActionArea>
           <div className="relative w-full h-[250px] lg:h-[300px]">
@@ -79,7 +97,7 @@ const ProductCard = ({ product }: Props) => {
           </CardContent>
         </CardActionArea>
       </Card>
-    </li>
+    </motion.li>
   );
 };
 
