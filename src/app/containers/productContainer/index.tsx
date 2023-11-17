@@ -9,7 +9,8 @@ import React, { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import SearchForm from "./searchProduct";
 import AddProduct from "./addProduct";
-
+import ProductCard from "./productCard";
+import Spinner from "@/app/components/spinner";
 type Props = {};
 
 const ProductContainer = (props: Props) => {
@@ -32,6 +33,12 @@ const ProductContainer = (props: Props) => {
       <div className="py-5 grid grid-cols-1 md:grid-cols-2 gap-10">
         <AddProduct />
         <SearchForm />
+      </div>
+      <div className="py-5">
+        <Spinner />
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <ProductCard />
+        </ul>
       </div>
     </Wrapper>
   );
