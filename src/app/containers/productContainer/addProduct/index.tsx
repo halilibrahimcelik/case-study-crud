@@ -33,6 +33,8 @@ const AddProduct = (props: Props) => {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData.entries());
     dispatch(addProduct({ productInfo: data }));
+    setOpen(false);
+    event.currentTarget.reset();
   };
   return (
     <>

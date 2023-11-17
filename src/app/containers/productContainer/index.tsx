@@ -2,6 +2,7 @@
 import Wrapper from "@/app/components/UI/Wrapper";
 import {
   fetchProducsList,
+  getLoading,
   getProductList,
 } from "@/store/features/product-slice";
 import { useAppDispatch } from "@/store/store";
@@ -15,6 +16,7 @@ type Props = {};
 
 const ProductContainer = (props: Props) => {
   const dispatch = useAppDispatch();
+  const loadingStatus = useSelector(getLoading);
   const productList = useSelector(getProductList);
 
   // Memoize the fetchProducsList
@@ -28,6 +30,7 @@ const ProductContainer = (props: Props) => {
   }, [memoizedFetchProductsList]);
 
   console.log(productList);
+  console.log(loadingStatus);
   return (
     <Wrapper component="section">
       <div className="py-5 grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -35,10 +38,13 @@ const ProductContainer = (props: Props) => {
         <SearchForm />
       </div>
       <div className="py-5">
-        <Spinner />
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <ProductCard />
-        </ul>
+        {loadingStatus ? (
+          <Spinner />
+        ) : (
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <ProductCard />
+          </ul>
+        )}
       </div>
     </Wrapper>
   );
