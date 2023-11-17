@@ -389,3 +389,6 @@ video {
 [hidden] {
   display: none;
 }
+.Mui-selected {
+  background-color: #5b44f3 !important;
+}
