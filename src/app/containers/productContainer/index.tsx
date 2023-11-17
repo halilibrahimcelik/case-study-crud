@@ -14,6 +14,7 @@ import ProductCard from "./productCard";
 import Spinner from "@/app/components/spinner";
 import { Products } from "@/lib/types";
 import { Pagination } from "@mui/material";
+import ProductTheme from "./customTheme";
 type Props = {};
 
 const ProductContainer = (props: Props) => {
@@ -46,37 +47,39 @@ const ProductContainer = (props: Props) => {
         <AddProduct />
         <SearchForm />
       </div>
-      <div className="py-5">
-        {loadingStatus ? (
-          <Spinner />
-        ) : (
-          <>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {productList.length === 0 && loadingStatus ? (
-                <p>Şu an gösterilecek bir ürün bulunmamaktadır</p>
-              ) : (
-                displayedProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))
+      <ProductTheme>
+        <div className="py-5">
+          {loadingStatus ? (
+            <Spinner />
+          ) : (
+            <>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {productList.length === 0 && loadingStatus ? (
+                  <p>Şu an gösterilecek bir ürün bulunmamaktadır</p>
+                ) : (
+                  displayedProducts.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))
+                )}
+              </ul>
+              {productList.length > 6 && (
+                <div className="flex py-5 justify-center w-full">
+                  <Pagination
+                    variant="text"
+                    size="large"
+                    siblingCount={1}
+                    onChange={handlePageChange}
+                    className="w-fit"
+                    page={page}
+                    count={Math.ceil(productList.length / 6)}
+                    color="primary"
+                  />
+                </div>
               )}
-            </ul>
-            {productList.length > 6 && (
-              <div className="flex py-5 justify-center w-full">
-                <Pagination
-                  variant="text"
-                  size="large"
-                  siblingCount={1}
-                  onChange={handlePageChange}
-                  className="w-fit"
-                  page={page}
-                  count={Math.ceil(productList.length / 6)}
-                  color="secondary"
-                />
-              </div>
-            )}
-          </>
-        )}
-      </div>
+            </>
+          )}
+        </div>
+      </ProductTheme>
     </Wrapper>
   );
 };
