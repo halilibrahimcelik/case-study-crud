@@ -29,7 +29,7 @@ const ProductContainer = (props: Props) => {
   console.log(productList);
   return (
     <Wrapper component="section">
-      <div className="grid grid-col-1 md:grid-col-2">
+      <div className="py-5 grid grid-cols-1 md:grid-cols-2 gap-10">
         <AddProduct />
         <SearchForm />
       </div>
