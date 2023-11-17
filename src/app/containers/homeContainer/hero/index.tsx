@@ -60,7 +60,7 @@ const HeroSection = (props: Props) => {
           height={50}
           objectFit="contain"
           alt="circle-yellow"
-          className="hidden absolute sm:block top-10 right-10 lg:right-[unset]  lg:top-40 lg:left-[-40px]"
+          className="hidden absolute sm:block top-10 right-10 lg:right-[unset]  lg:top-40 lg:left-[-25px] xl:left-[-40px]"
         />
       </motion.div>
       <motion.div
@@ -72,7 +72,7 @@ const HeroSection = (props: Props) => {
         <Image
           src={PhoneBanner}
           alt="acme-phone-banner"
-          className="w-auto h-auto"
+          className="w-full  md:w-auto md:h-auto "
           unoptimized
           objectFit="cover"
           placeholder="blur"
