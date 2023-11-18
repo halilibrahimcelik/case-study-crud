@@ -1,15 +1,19 @@
 import { Products } from "@/lib/types";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Chip } from "@mui/material";
+import { CardActionArea, Chip, IconButton } from "@mui/material";
 import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import CategoryIcon from "@mui/icons-material/Category";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import Alert from "@mui/material/Alert";
+import Grow from "@mui/material/Grow";
+import CloseIcon from "@mui/icons-material/Close";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useAppDispatch } from "@/store/store";
@@ -24,11 +28,27 @@ type Props = {
 const ProductCard = ({ product, index, handleId, setOpen }: Props) => {
   const { title, brand, description, thumbnail, category, price, rating } =
     product;
+  const [toggle, setToggle] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteProduct({ id: product.id }));
+    setToggle(true);
+    if (toggle) {
+      dispatch(deleteProduct({ id: product.id }));
+    }
   };
+  useEffect(() => {
+    if (toggle) {
+      const timeId = setTimeout(() => {
+        // After 3 seconds set the show value to false
+        setToggle(false);
+      }, 2500);
+      return () => {
+        clearTimeout(timeId);
+      };
+    }
+  }, [toggle]);
+
   return (
     <motion.li
       layout
@@ -41,6 +61,41 @@ const ProductCard = ({ product, index, handleId, setOpen }: Props) => {
       exit={{ opacity: 0, y: -100 }}
       className="group"
     >
+      <Grow in={toggle}>
+        <Alert
+          severity="warning"
+          sx={{ position: "fixed", left: 10, zIndex: 100, top: 100 }}
+          action={
+            <>
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                title=""
+                size="small"
+                onClick={() => {
+                  setToggle(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+              <IconButton
+                aria-label="close"
+                title="Evet"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  handleDelete();
+                }}
+              >
+                <DoneAllIcon fontSize="inherit" />
+              </IconButton>
+            </>
+          }
+        >
+          {product.title} adlı ürünü silmek istediğinden emin misin?
+        </Alert>
+      </Grow>
+
       <Card className="w-full h-full sm:max-w-[32rem]">
         <CardActionArea
           sx={{

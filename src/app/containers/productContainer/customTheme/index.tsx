@@ -18,6 +18,17 @@ const ProductTheme = ({ children }: Props) => {
             main: "#ffcb13",
           },
         },
+        components: {
+          MuiAlert: {
+            styleOverrides: {
+              standardWarning: {
+                backgroundColor: "#edc73ef2",
+                color: "#111",
+                fontFamily: "var(--font-nunito)",
+              },
+            },
+          },
+        },
       }),
     []
   );
