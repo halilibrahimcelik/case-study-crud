@@ -29,7 +29,15 @@ const ProductCard = ({ product, index }: Props) => {
       className=""
     >
       <Card className="w-full h-full sm:max-w-[32rem] ">
-        <CardActionArea className="flex flex-col justify-start gap-2  h-full">
+        <CardActionArea
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+            justifyContent: "start",
+            gap: "1rem",
+          }}
+        >
           <div className="relative w-full h-[250px] lg:h-[300px]">
             <Image
               src={thumbnail}
@@ -38,10 +46,10 @@ const ProductCard = ({ product, index }: Props) => {
               blurDataURL={thumbnail}
               placeholder="blur"
               loading="lazy"
-              className="w-full h-[250px] object-cover "
+              className="w-full h-[250px] object-cover p-2"
             />
           </div>
-          <CardContent className="flex flex-col gap-2">
+          <CardContent className="flex flex-col w-full gap-2">
             <div className="flex gap-2 justify-between">
               <h4 className="text-2xl lg:text-3xl"> {title}</h4>
               <Chip
