@@ -10,6 +10,7 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import CategoryIcon from "@mui/icons-material/Category";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useAppDispatch } from "@/store/store";
 type Props = {
   product: Products;
   index: number;
@@ -18,7 +19,13 @@ type Props = {
 const ProductCard = ({ product, index }: Props) => {
   const { title, brand, description, thumbnail, category, price, rating } =
     product;
+  const dispatch = useAppDispatch();
 
+  const handleUpdate = (
+    e: React.MouseEventHandler<HTMLButtonElement> | number
+  ) => {
+    console.log(e);
+  };
   return (
     <motion.li
       initial={{ opacity: 0 }}
@@ -30,6 +37,7 @@ const ProductCard = ({ product, index }: Props) => {
     >
       <Card className="w-full h-full sm:max-w-[32rem] ">
         <CardActionArea
+          onClick={() => handleUpdate(product.id)}
           sx={{
             display: "flex",
             flexDirection: "column",
