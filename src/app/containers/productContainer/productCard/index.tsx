@@ -8,6 +8,8 @@ import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import CategoryIcon from "@mui/icons-material/Category";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useAppDispatch } from "@/store/store";
@@ -17,6 +19,8 @@ type Props = {
 };
 
 const ProductCard = ({ product, index }: Props) => {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
   const { title, brand, description, thumbnail, category, price, rating } =
     product;
   const dispatch = useAppDispatch();
@@ -35,15 +39,16 @@ const ProductCard = ({ product, index }: Props) => {
       }}
       className=""
     >
-      <Card className="w-full h-full sm:max-w-[32rem] ">
+      <Card className="w-full h-full sm:max-w-[32rem] group ">
         <CardActionArea
-          onClick={() => handleUpdate(product.id)}
           sx={{
             display: "flex",
             flexDirection: "column",
             height: "100%",
             justifyContent: "start",
             gap: "1rem",
+            position: "relative",
+            paddingBottom: "2.4rem",
           }}
         >
           <div className="relative w-full h-[250px] lg:h-[300px]">
@@ -54,7 +59,7 @@ const ProductCard = ({ product, index }: Props) => {
               blurDataURL={thumbnail}
               placeholder="blur"
               loading="lazy"
-              className="w-full h-[250px] object-cover p-2"
+              className="w-full h-[250px] object-cover "
             />
           </div>
           <CardContent className="flex flex-col w-full gap-2">
@@ -100,6 +105,28 @@ const ProductCard = ({ product, index }: Props) => {
               {description}
             </Typography>
           </CardContent>
+          <div className="self-end flex gap absolute bottom-0 right-2">
+            <div className=" p-[10px] translate-y-[50px] group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition  delay-200 duration-200 ease-in">
+              <Chip
+                onClick={() => handleUpdate(product.id)}
+                variant="outlined"
+                color="primary"
+                sx={{ borderRadius: "8px" }}
+                icon={<DesignServicesIcon />}
+                label="Düzenle"
+              />
+            </div>
+            <div className=" p-[10px] translate-y-[50px] group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition  delay-200 duration-200 ease-in">
+              <Chip
+                onClick={() => handleUpdate(product.id)}
+                variant="outlined"
+                color="primary"
+                sx={{ borderRadius: "8px" }}
+                icon={<DeleteForeverIcon />}
+                label="Ürünü sil"
+              />
+            </div>
+          </div>
         </CardActionArea>
       </Card>
     </motion.li>
