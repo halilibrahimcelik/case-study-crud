@@ -12,35 +12,24 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 type Props = {
   product: Products;
+  index: number;
 };
 
-const ProductCard = ({ product }: Props) => {
+const ProductCard = ({ product, index }: Props) => {
   const { title, brand, description, thumbnail, category, price, rating } =
     product;
-  const variants = {
-    open: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        y: { stiffness: 10, velocity: -100 },
-      },
-    },
-    closed: {
-      y: 0,
-      opacity: 0,
-      transition: {
-        y: { stiffness: 1000 },
-      },
-    },
-  };
+
   return (
     <motion.li
-      initial={variants.closed}
-      animate={variants.open}
-      className="flex justify-center"
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        transition: { delay: 0.1 * index, ease: "backIn" },
+      }}
+      className=""
     >
-      <Card className="w-full sm:max-w-[32rem] ">
-        <CardActionArea>
+      <Card className="w-full h-full sm:max-w-[32rem] ">
+        <CardActionArea className="flex flex-col justify-start gap-2  h-full">
           <div className="relative w-full h-[250px] lg:h-[300px]">
             <Image
               src={thumbnail}
