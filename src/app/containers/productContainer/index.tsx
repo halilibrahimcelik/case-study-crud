@@ -4,6 +4,7 @@ import {
   fetchProducsList,
   getLoading,
   getProductList,
+  updateProduct,
 } from "@/store/features/product-slice";
 import { useAppDispatch } from "@/store/store";
 import React, { useEffect, useMemo } from "react";
@@ -16,6 +17,7 @@ import { Products } from "@/lib/types";
 import { Pagination } from "@mui/material";
 import ProductTheme from "./customTheme";
 import { LayoutGroup, motion } from "framer-motion";
+import FormModal from "./formModal";
 type Props = {};
 
 const ProductContainer = (props: Props) => {
@@ -23,6 +25,9 @@ const ProductContainer = (props: Props) => {
   const loadingStatus = useSelector(getLoading);
   const productList: Products[] = useSelector(getProductList);
   const [page, setPage] = React.useState(1);
+  const [open, setOpen] = React.useState(false);
+  const [id, setId] = React.useState<number | null>(null);
+  const handleClose = () => setOpen(false);
   const itemsPerPage = 6;
 
   // Memoize the fetchProducsList
@@ -42,13 +47,16 @@ const ProductContainer = (props: Props) => {
   const handlePageChange = (event: React.ChangeEvent<any>, newPage: number) => {
     setPage(newPage);
   };
-  const variants = {
-    open: {
-      transition: { staggerChildren: 0.5, delayChildren: 0.5 },
-    },
-    closed: {
-      transition: { staggerChildren: 0.05, staggerDirection: -1 },
-    },
+  const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    console.log(id);
+    dispatch(updateProduct({ id: id!, ...data }));
+    setOpen(false);
+  };
+  const handleId = (id: number) => {
+    setId(id);
   };
   return (
     <Wrapper component="section">
@@ -75,6 +83,8 @@ const ProductContainer = (props: Props) => {
                           index={index}
                           key={product.id}
                           product={product}
+                          handleId={handleId}
+                          setOpen={setOpen}
                         />
                       ))
                     )}
@@ -99,6 +109,12 @@ const ProductContainer = (props: Props) => {
           )}
         </div>
       </ProductTheme>
+      <FormModal
+        open={open}
+        handleClose={handleClose}
+        handleSubmit={handleUpdate}
+        id={id!}
+      />
     </Wrapper>
   );
 };
