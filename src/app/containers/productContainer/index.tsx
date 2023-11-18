@@ -42,8 +42,6 @@ const ProductContainer = (props: Props) => {
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const displayedProducts = productList.slice(startIndex, endIndex);
-  console.log(productList);
-  console.log(displayedProducts);
   const handlePageChange = (event: React.ChangeEvent<any>, newPage: number) => {
     setPage(newPage);
   };

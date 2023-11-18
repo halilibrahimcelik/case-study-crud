@@ -61,6 +61,7 @@ export const productSlice = createSlice({
     },
     deleteProduct: (state, action) => {
       const { id } = action.payload;
+      console.log(id);
       const updatedProducts = state.products.filter(
         (product) => product.id !== id
       );
