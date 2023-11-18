@@ -15,7 +15,7 @@ import Spinner from "@/app/components/spinner";
 import { Products } from "@/lib/types";
 import { Pagination } from "@mui/material";
 import ProductTheme from "./customTheme";
-import { AnimatePresence, motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 type Props = {};
 
 const ProductContainer = (props: Props) => {
@@ -62,7 +62,7 @@ const ProductContainer = (props: Props) => {
             <Spinner />
           ) : (
             <>
-              <AnimatePresence>
+              <LayoutGroup>
                 {!loadingStatus && (
                   <motion.ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {productList.length === 0 && loadingStatus ? (
@@ -80,7 +80,7 @@ const ProductContainer = (props: Props) => {
                     )}
                   </motion.ul>
                 )}
-              </AnimatePresence>
+              </LayoutGroup>
               {productList.length > 6 && (
                 <div className="flex py-5 justify-center w-full">
                   <Pagination
