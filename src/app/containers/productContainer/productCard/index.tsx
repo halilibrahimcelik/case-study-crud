@@ -30,9 +30,9 @@ const ProductCard = ({ product, index, handleId, setOpen }: Props) => {
         opacity: 1,
         transition: { delay: 0.1 * index, ease: "backIn" },
       }}
-      className=""
+      className="group"
     >
-      <Card className="w-full h-full sm:max-w-[32rem] group ">
+      <Card className="w-full h-full sm:max-w-[32rem]">
         <CardActionArea
           sx={{
             display: "flex",
@@ -99,7 +99,7 @@ const ProductCard = ({ product, index, handleId, setOpen }: Props) => {
             </Typography>
           </CardContent>
           <div className="self-end flex gap absolute bottom-0 right-2">
-            <div className=" p-[10px] translate-y-[50px] group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition  delay-200 duration-200 ease-in">
+            <div className=" p-[10px]   opacity-0 group-hover:opacity-100 transition  delay-200 duration-200 ease-in">
               <Chip
                 onClick={() => (handleId(product.id), setOpen(true))}
                 variant="outlined"
@@ -109,7 +109,7 @@ const ProductCard = ({ product, index, handleId, setOpen }: Props) => {
                 label="Düzenle"
               />
             </div>
-            <div className=" p-[10px] translate-y-[50px] group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition  delay-200 duration-200 ease-in">
+            <div className=" p-[10px]   opacity-0 group-hover:opacity-100 transition  delay-200 duration-200 ease-in">
               <Chip
                 onClick={() => handleId(product.id)}
                 variant="outlined"

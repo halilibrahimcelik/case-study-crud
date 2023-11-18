@@ -38,12 +38,9 @@ const style = {
 };
 
 const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
-  console.log(id, "formmodal");
-
   const selectedProduct = useSelector((state: { products: ProductState }) =>
     getProductbyId(state, id as number)
   );
-  console.log(selectedProduct, "selectedProduct");
   return (
     <Modal
       keepMounted

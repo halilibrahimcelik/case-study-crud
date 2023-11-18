@@ -48,8 +48,12 @@ const ProductContainer = (props: Props) => {
     setPage(newPage);
   };
   const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
     console.log(id);
-    dispatch(updateProduct({ id: id!, data: e }));
+    dispatch(updateProduct({ id: id!, ...data }));
+    setOpen(false);
   };
   const handleId = (id: number) => {
     setId(id);
