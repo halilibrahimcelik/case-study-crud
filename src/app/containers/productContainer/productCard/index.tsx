@@ -12,6 +12,8 @@ import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useAppDispatch } from "@/store/store";
+import { deleteProduct } from "@/store/features/product-slice";
 type Props = {
   product: Products;
   index: number;
@@ -22,14 +24,21 @@ type Props = {
 const ProductCard = ({ product, index, handleId, setOpen }: Props) => {
   const { title, brand, description, thumbnail, category, price, rating } =
     product;
+  const dispatch = useAppDispatch();
 
+  const handleDelete = () => {
+    dispatch(deleteProduct({ id: product.id }));
+  };
   return (
     <motion.li
-      initial={{ opacity: 0 }}
+      layout
+      initial={{ opacity: 0, y: -50 }}
       animate={{
         opacity: 1,
+        y: 0,
         transition: { delay: 0.1 * index, ease: "backIn" },
       }}
+      exit={{ opacity: 0, y: -100 }}
       className="group"
     >
       <Card className="w-full h-full sm:max-w-[32rem]">
@@ -111,7 +120,7 @@ const ProductCard = ({ product, index, handleId, setOpen }: Props) => {
             </div>
             <div className=" p-[10px]   opacity-0 group-hover:opacity-100 transition  delay-200 duration-200 ease-in">
               <Chip
-                onClick={() => handleId(product.id)}
+                onClick={handleDelete}
                 variant="outlined"
                 color="primary"
                 sx={{ borderRadius: "8px" }}
