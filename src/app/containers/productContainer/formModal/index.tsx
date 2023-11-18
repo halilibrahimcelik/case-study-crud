@@ -12,10 +12,18 @@ import CustomButon from "@/app/components/UI/button";
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
+import { useSelector } from "react-redux";
+import { get } from "http";
+import { getProductbyId } from "@/store/features/product-slice";
+import { ProductState } from "@/store/features/product-slice";
 type Props = {
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleSubmit: (
+    event: React.FormEvent<HTMLFormElement>,
+    n?: React.MouseEventHandler<HTMLButtonElement> | number
+  ) => void;
   handleClose: () => void;
   open: boolean;
+  id?: number;
 };
 const style = {
   position: "absolute" as "absolute",
@@ -29,7 +37,13 @@ const style = {
   p: 4,
 };
 
-const FormModal = ({ handleSubmit, open, handleClose }: Props) => {
+const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
+  console.log(id, "formmodal");
+
+  const selectedProduct = useSelector((state: { products: ProductState }) =>
+    getProductbyId(state, id as number)
+  );
+  console.log(selectedProduct, "selectedProduct");
   return (
     <Modal
       keepMounted
@@ -61,6 +75,8 @@ const FormModal = ({ handleSubmit, open, handleClose }: Props) => {
                 id="input-title"
                 label="Ürün Adı"
                 variant="standard"
+                defaultValue={selectedProduct?.title}
+                focused={id ? true : false}
               />
             </Box>
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -77,6 +93,8 @@ const FormModal = ({ handleSubmit, open, handleClose }: Props) => {
                 minRows={1}
                 size="lg"
                 variant="outlined"
+                defaultValue={selectedProduct?.description}
+                autoFocus={id ? true : false}
               />
             </Box>
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -91,6 +109,8 @@ const FormModal = ({ handleSubmit, open, handleClose }: Props) => {
                 label="Fiyat"
                 type="number"
                 variant="standard"
+                defaultValue={selectedProduct?.price}
+                focused={id ? true : false}
               />
             </Box>
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -103,6 +123,8 @@ const FormModal = ({ handleSubmit, open, handleClose }: Props) => {
                 id="input-rating"
                 label="Puan"
                 variant="standard"
+                defaultValue={selectedProduct?.rating}
+                focused={id ? true : false}
               />
             </Box>
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -116,6 +138,8 @@ const FormModal = ({ handleSubmit, open, handleClose }: Props) => {
                 id="input-brand"
                 label="Marka Adı"
                 variant="standard"
+                defaultValue={selectedProduct?.brand}
+                focused={id ? true : false}
               />
             </Box>
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -127,6 +151,8 @@ const FormModal = ({ handleSubmit, open, handleClose }: Props) => {
                 id="input-category"
                 label="Kategori"
                 variant="standard"
+                defaultValue={selectedProduct?.category}
+                focused={id ? true : false}
               />
             </Box>
             <CustomButon

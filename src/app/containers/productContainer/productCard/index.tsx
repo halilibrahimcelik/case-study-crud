@@ -12,24 +12,17 @@ import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useAppDispatch } from "@/store/store";
 type Props = {
   product: Products;
   index: number;
+  handleId: (n: number) => void;
+  setOpen: (n: boolean) => void;
 };
 
-const ProductCard = ({ product, index }: Props) => {
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => setOpen(false);
+const ProductCard = ({ product, index, handleId, setOpen }: Props) => {
   const { title, brand, description, thumbnail, category, price, rating } =
     product;
-  const dispatch = useAppDispatch();
 
-  const handleUpdate = (
-    e: React.MouseEventHandler<HTMLButtonElement> | number
-  ) => {
-    console.log(e);
-  };
   return (
     <motion.li
       initial={{ opacity: 0 }}
@@ -108,7 +101,7 @@ const ProductCard = ({ product, index }: Props) => {
           <div className="self-end flex gap absolute bottom-0 right-2">
             <div className=" p-[10px] translate-y-[50px] group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition  delay-200 duration-200 ease-in">
               <Chip
-                onClick={() => handleUpdate(product.id)}
+                onClick={() => (handleId(product.id), setOpen(true))}
                 variant="outlined"
                 color="primary"
                 sx={{ borderRadius: "8px" }}
@@ -118,7 +111,7 @@ const ProductCard = ({ product, index }: Props) => {
             </div>
             <div className=" p-[10px] translate-y-[50px] group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition  delay-200 duration-200 ease-in">
               <Chip
-                onClick={() => handleUpdate(product.id)}
+                onClick={() => handleId(product.id)}
                 variant="outlined"
                 color="primary"
                 sx={{ borderRadius: "8px" }}

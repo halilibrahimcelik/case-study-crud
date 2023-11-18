@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Products } from "@/lib/types";
 import placeholderImage from "@/assets/default-product-image.png";
-interface ProductState {
+export interface ProductState {
   products: Products[];
   loading: boolean;
   error: string | null;
@@ -98,5 +98,11 @@ export const getLoading = (state: { products: ProductState }) =>
   state.products.loading;
 export const getError = (state: { products: ProductState }) =>
   state.products.error;
+export const getProductbyId = (
+  state: { products: ProductState },
+  id: number
+) => {
+  return state.products.products.find((product) => product.id === id);
+};
 
 export default productSlice.reducer;
