@@ -4,6 +4,7 @@ import {
   fetchProductList,
   getAllProducts,
   getLoading,
+  getNotFound,
   getProductList,
   updateProduct,
 } from "@/store/features/product-slice";
@@ -24,6 +25,7 @@ type Props = {};
 const ProductContainer = (props: Props) => {
   const dispatch = useAppDispatch();
   const loadingStatus = useSelector(getLoading);
+  const notFoundProduct = useSelector(getNotFound);
   const productList: Products[] = useSelector(getProductList);
   const [page, setPage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
@@ -70,6 +72,16 @@ const ProductContainer = (props: Props) => {
             <Spinner />
           ) : (
             <>
+              {notFoundProduct && (
+                <motion.p
+                  animate={{ opacity: notFoundProduct ? 1 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeIn" }}
+                  initial={{ opacity: notFoundProduct ? 0 : 1 }}
+                  className="text-center text-red-500"
+                >
+                  Ürün bulunamadı Lütfen tekrar deneyiniz.
+                </motion.p>
+              )}
               <LayoutGroup>
                 {!loadingStatus && (
                   <motion.ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
