@@ -58,11 +58,11 @@ const ProductContainer = (props: Props) => {
   };
   return (
     <Wrapper component="section">
-      <div className="py-5 grid grid-cols-1 md:grid-cols-2 gap-10">
-        <AddProduct />
-        <SearchForm />
-      </div>
       <ProductTheme>
+        <div className="py-5 grid grid-cols-1 md:grid-cols-2 gap-10">
+          <AddProduct />
+          <SearchForm />
+        </div>
         <div className="py-5">
           {loadingStatus ? (
             <Spinner />

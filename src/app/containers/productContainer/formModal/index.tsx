@@ -41,12 +41,9 @@ const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
   const selectedProduct = useSelector((state: { products: ProductState }) =>
     getProductbyId(state, id as number)
   );
-  // const [description, setDesc] = useState<string>(
-  //   selectedProduct?.description!
-  // );
+
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
-    // setDesc(selectedProduct?.description!);
     if (textAreaRef.current && selectedProduct?.description !== undefined) {
       textAreaRef.current.value = selectedProduct.description;
     }
