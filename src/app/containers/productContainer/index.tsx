@@ -63,7 +63,7 @@ const ProductContainer = (props: Props) => {
   return (
     <Wrapper component="section">
       <ProductTheme>
-        <div className="py-5 grid grid-cols-1 md:grid-cols-3 xl:px-5 gap-10">
+        <div className="pb-5 grid grid-cols-1 md:grid-cols-3 xl:px-5 gap-10">
           <AddProduct />
           <SearchForm />
         </div>

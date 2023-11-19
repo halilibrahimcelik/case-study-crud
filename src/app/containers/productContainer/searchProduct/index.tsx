@@ -4,10 +4,13 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { InputBase } from "@mui/material";
+import { InputBase, Tooltip } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import { useAppDispatch } from "@/store/store";
+import NewReleasesIcon from "@mui/icons-material/NewReleases";
+import Chip from "@mui/material/Chip";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import {
   getAllProducts,
   resetProduct,
@@ -66,7 +69,6 @@ const SearchForm = (props: Props) => {
   >("title");
   const dispatch = useAppDispatch();
   const defaultProducts = useSelector(getAllProducts);
-  console.log(defaultProducts);
   const handleCategory = (event: SelectChangeEvent) => {
     event.target.value as string;
     setSearchCategory(event.target.value as "title" | "brand" | "category");
@@ -85,50 +87,71 @@ const SearchForm = (props: Props) => {
 
     dispatch(searchProducts({ filteredProducts }));
   };
-
+  const handleReset = () => {
+    dispatch(searchProducts({ filteredProducts: defaultProducts }));
+  };
   return (
-    <div className="col-span-2 gap-2 flex items-center">
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">
-            {searchCategory === "title"
-              ? "Ürün Adı"
-              : searchCategory === "category"
-              ? "Kategori"
-              : "Marka"}
-          </InputLabel>
-          <Select
+    <div className="col-span-2  flex flex-col gap-4">
+      <div>
+        <Tooltip title="Kategori seçimize göre arama yapabilrisiniz" arrow>
+          <NewReleasesIcon
+            className="cursor-pointer"
             color="primary"
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={searchCategory}
-            label={
-              searchCategory === "title"
+            fontSize="small"
+          />
+        </Tooltip>
+      </div>
+      <div className="gap-2  flex items-center">
+        <Box sx={{ minWidth: 120 }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">
+              {searchCategory === "title"
                 ? "Ürün Adı"
                 : searchCategory === "category"
                 ? "Kategori"
-                : "Marka"
-            }
-            onChange={handleCategory}
-          >
-            <MenuItem value={"title"}>Ürün Adı</MenuItem>
-            <MenuItem value={"category"}>Kategori</MenuItem>
-            <MenuItem value={"brand"}>Marka</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
-      <Box onSubmit={handleSearch} component={"form"}>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            name="search"
-            placeholder="Ara..."
-            inputProps={{ "aria-label": "search" }}
-          />
-        </Search>
-      </Box>
+                : "Marka"}
+            </InputLabel>
+            <Select
+              color="primary"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={searchCategory}
+              label={
+                searchCategory === "title"
+                  ? "Ürün Adı"
+                  : searchCategory === "category"
+                  ? "Kategori"
+                  : "Marka"
+              }
+              onChange={handleCategory}
+            >
+              <MenuItem value={"title"}>Ürün Adı</MenuItem>
+              <MenuItem value={"category"}>Kategori</MenuItem>
+              <MenuItem value={"brand"}>Marka</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Box onSubmit={handleSearch} component={"form"}>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              name="search"
+              placeholder="Ürün Ara..."
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+        </Box>
+        <Chip
+          sx={{ borderRadius: "4px" }}
+          clickable
+          icon={<RestartAltIcon />}
+          onClick={handleReset}
+          label="Sıfırla"
+          color="primary"
+        />
+      </div>
     </div>
   );
 };
