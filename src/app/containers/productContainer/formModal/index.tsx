@@ -1,7 +1,7 @@
 "use client";
 import { Box, TextField } from "@mui/material";
 import Textarea from "@mui/joy/Textarea";
-
+import { useEffect, useRef, useState } from "react";
 import SubtitlesIcon from "@mui/icons-material/Subtitles";
 import DescriptionIcon from "@mui/icons-material/Description";
 import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
@@ -41,6 +41,16 @@ const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
   const selectedProduct = useSelector((state: { products: ProductState }) =>
     getProductbyId(state, id as number)
   );
+  // const [description, setDesc] = useState<string>(
+  //   selectedProduct?.description!
+  // );
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    // setDesc(selectedProduct?.description!);
+    if (textAreaRef.current && selectedProduct?.description !== undefined) {
+      textAreaRef.current.value = selectedProduct.description;
+    }
+  }, [selectedProduct?.description]);
   return (
     <Modal
       keepMounted
@@ -66,7 +76,7 @@ const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
               <SubtitlesIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
               <TextField
-                className="w-full"
+                className="w-full p-2"
                 required
                 name="title"
                 id="input-title"
@@ -80,18 +90,15 @@ const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
               <DescriptionIcon
                 sx={{ color: "action.active", mr: 1, my: 0.5 }}
               />
-              <Textarea
-                className="w-full"
+              <textarea
+                ref={textAreaRef}
+                className="w-full outline-sky-700 max-h-[100px] p-1"
                 required
+                rows={5}
+                cols={0}
                 name="description"
                 id="input-description"
                 placeholder="Ürün Açıklaması"
-                color="neutral"
-                minRows={1}
-                size="lg"
-                variant="outlined"
-                defaultValue={selectedProduct?.description}
-                autoFocus={id ? true : false}
               />
             </Box>
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
