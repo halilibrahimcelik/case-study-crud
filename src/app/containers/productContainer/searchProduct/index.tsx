@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -7,6 +7,13 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
+import { useAppDispatch } from "@/store/store";
+import {
+  getAllProducts,
+  resetProduct,
+  searchProducts,
+} from "@/store/features/product-slice";
+import { useSelector } from "react-redux";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -54,11 +61,31 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 type Props = {};
 
 const SearchForm = (props: Props) => {
-  const [searchCategory, setSearchCategory] = React.useState("title");
-  const handleChange = (event: SelectChangeEvent) => {
+  const [searchCategory, setSearchCategory] = React.useState<
+    "title" | "brand" | "category"
+  >("title");
+  const dispatch = useAppDispatch();
+  const defaultProducts = useSelector(getAllProducts);
+  console.log(defaultProducts);
+  const handleCategory = (event: SelectChangeEvent) => {
     event.target.value as string;
-    setSearchCategory(event.target.value as string);
+    setSearchCategory(event.target.value as "title" | "brand" | "category");
   };
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const searchQuery = formData.get("search") as string;
+    const filteredProducts = defaultProducts.filter((product) =>
+      product[searchCategory]!.toString()
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
+        ? product
+        : null
+    );
+
+    dispatch(searchProducts({ filteredProducts }));
+  };
+
   return (
     <div className="col-span-2 gap-2 flex items-center">
       <Box sx={{ minWidth: 120 }}>
@@ -82,7 +109,7 @@ const SearchForm = (props: Props) => {
                 ? "Kategori"
                 : "Marka"
             }
-            onChange={handleChange}
+            onChange={handleCategory}
           >
             <MenuItem value={"title"}>Ürün Adı</MenuItem>
             <MenuItem value={"category"}>Kategori</MenuItem>
@@ -90,12 +117,13 @@ const SearchForm = (props: Props) => {
           </Select>
         </FormControl>
       </Box>
-      <Box>
+      <Box onSubmit={handleSearch} component={"form"}>
         <Search>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
           <StyledInputBase
+            name="search"
             placeholder="Ara..."
             inputProps={{ "aria-label": "search" }}
           />

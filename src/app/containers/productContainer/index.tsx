@@ -1,7 +1,8 @@
 "use client";
 import Wrapper from "@/app/components/UI/Wrapper";
 import {
-  fetchProducsList,
+  fetchProductList,
+  getAllProducts,
   getLoading,
   getProductList,
   updateProduct,
@@ -32,7 +33,7 @@ const ProductContainer = (props: Props) => {
 
   // Memoize the fetchProducsList
   const memoizedFetchProductsList = useMemo(() => {
-    return () => dispatch(fetchProducsList());
+    return () => dispatch(fetchProductList());
   }, [dispatch]);
 
   useEffect(() => {
@@ -56,6 +57,7 @@ const ProductContainer = (props: Props) => {
   const handleId = (id: number) => {
     setId(id);
   };
+
   return (
     <Wrapper component="section">
       <ProductTheme>
