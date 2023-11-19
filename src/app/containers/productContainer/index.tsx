@@ -1,8 +1,10 @@
 "use client";
 import Wrapper from "@/app/components/UI/Wrapper";
 import {
-  fetchProducsList,
+  fetchProductList,
+  getAllProducts,
   getLoading,
+  getNotFound,
   getProductList,
   updateProduct,
 } from "@/store/features/product-slice";
@@ -23,6 +25,7 @@ type Props = {};
 const ProductContainer = (props: Props) => {
   const dispatch = useAppDispatch();
   const loadingStatus = useSelector(getLoading);
+  const notFoundProduct = useSelector(getNotFound);
   const productList: Products[] = useSelector(getProductList);
   const [page, setPage] = React.useState(1);
   const [open, setOpen] = React.useState(false);
@@ -32,7 +35,7 @@ const ProductContainer = (props: Props) => {
 
   // Memoize the fetchProducsList
   const memoizedFetchProductsList = useMemo(() => {
-    return () => dispatch(fetchProducsList());
+    return () => dispatch(fetchProductList());
   }, [dispatch]);
 
   useEffect(() => {
@@ -56,18 +59,29 @@ const ProductContainer = (props: Props) => {
   const handleId = (id: number) => {
     setId(id);
   };
+
   return (
     <Wrapper component="section">
-      <div className="py-5 grid grid-cols-1 md:grid-cols-2 gap-10">
-        <AddProduct />
-        <SearchForm />
-      </div>
       <ProductTheme>
+        <div className="pb-5 grid  w-full grid-rows2 md:grid-rows-1 grid-cols-1 md:grid-cols-3 xl:px-5 gap-10 items-center     ">
+          <AddProduct />
+          <SearchForm />
+        </div>
         <div className="py-5">
           {loadingStatus ? (
             <Spinner />
           ) : (
             <>
+              {notFoundProduct && (
+                <motion.p
+                  animate={{ opacity: notFoundProduct ? 1 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeIn" }}
+                  initial={{ opacity: notFoundProduct ? 0 : 1 }}
+                  className="text-center text-red-500"
+                >
+                  Ürün bulunamadı Lütfen tekrar deneyiniz.
+                </motion.p>
+              )}
               <LayoutGroup>
                 {!loadingStatus && (
                   <motion.ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
