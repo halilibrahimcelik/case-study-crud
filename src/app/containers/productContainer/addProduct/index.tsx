@@ -22,13 +22,13 @@ const AddProduct = (props: Props) => {
     event.currentTarget.reset();
   };
   return (
-    <div className="flex  items-end">
+    <div className="flex   h-full justify-center md:justify-start items-center md:items-end">
       <CustomButon
         onClick={() => setOpen(true)}
         color="secondary"
         text="Ürün Ekleme"
         variant="contained"
-        customClass="w-[20rem]"
+        customClass="w-full md:w-[10rem] "
       />
       <FormModal
         handleSubmit={handleAddProduct}

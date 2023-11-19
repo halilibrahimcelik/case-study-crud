@@ -25,7 +25,7 @@ const Search = styled("div")(({ theme }) => ({
     backgroundColor: alpha(theme.palette.common.black, 0.25),
   },
   marginLeft: 0,
-
+  height: "100%",
   width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(1),
@@ -53,7 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
 
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("lg")]: {
       width: "25ch",
       "&:focus": {
         width: "35ch",
@@ -94,8 +94,8 @@ const SearchForm = (props: Props) => {
     dispatch(searchProducts({ filteredProducts: defaultProducts }));
   };
   return (
-    <div className="col-span-2  flex flex-col gap-4">
-      <div>
+    <div className="md:col-span-2  flex flex-col gap-4 relative">
+      <div className="absolute md:relative top-[-30px] md:top-0 left-0">
         <Tooltip title="Kategori seçimize göre arama yapabilrisiniz" arrow>
           <NewReleasesIcon
             className="cursor-pointer"
@@ -104,8 +104,8 @@ const SearchForm = (props: Props) => {
           />
         </Tooltip>
       </div>
-      <div className="gap-2  flex items-center justify-between">
-        <Box sx={{ minWidth: 120 }}>
+      <div className="gap-4 md:gap-2  flex flex-wrap md:flex-nowrap items-center justify-between">
+        <Box className="w-full sm:w-[120px]">
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">
               {searchCategory === "title"
@@ -115,6 +115,7 @@ const SearchForm = (props: Props) => {
                 : "Marka"}
             </InputLabel>
             <Select
+              SelectDisplayProps={{ style: { padding: "8px 14px" } }}
               color="primary"
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -134,7 +135,12 @@ const SearchForm = (props: Props) => {
             </Select>
           </FormControl>
         </Box>
-        <Box ref={formRef} onSubmit={handleSearch} component={"form"}>
+        <Box
+          className="w-full sm:w-[unset]"
+          ref={formRef}
+          onSubmit={handleSearch}
+          component={"form"}
+        >
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -147,6 +153,7 @@ const SearchForm = (props: Props) => {
           </Search>
         </Box>
         <Chip
+          className="w-full  mx-auto sm:m-0   sm:w-fit self-end"
           sx={{ borderRadius: "4px" }}
           clickable
           icon={<RestartAltIcon />}
