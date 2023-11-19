@@ -42,7 +42,7 @@ const ProductCard = ({ product, index, handleId, setOpen }: Props) => {
       const timeId = setTimeout(() => {
         // After 3 seconds set the show value to false
         setToggle(false);
-      }, 2500);
+      }, 3000);
       return () => {
         clearTimeout(timeId);
       };
@@ -59,7 +59,7 @@ const ProductCard = ({ product, index, handleId, setOpen }: Props) => {
         transition: { delay: 0.1 * index, ease: "backIn" },
       }}
       exit={{ opacity: 0, y: -100 }}
-      className="group"
+      className="group flex justify-center "
     >
       <Grow in={toggle}>
         <Alert
@@ -105,7 +105,7 @@ const ProductCard = ({ product, index, handleId, setOpen }: Props) => {
             justifyContent: "start",
             gap: "1rem",
             position: "relative",
-            paddingBottom: "2.4rem",
+            paddingBottom: "2rem",
           }}
         >
           <div className="relative w-full h-[250px] lg:h-[300px]">
@@ -119,7 +119,10 @@ const ProductCard = ({ product, index, handleId, setOpen }: Props) => {
               className="w-full h-[250px] object-cover "
             />
           </div>
-          <CardContent className="flex flex-col w-full gap-2">
+          <CardContent
+            sx={{ paddingTop: 0 }}
+            className="flex flex-col w-full gap-2"
+          >
             <div className="flex gap-2 justify-between">
               <h4 className="text-2xl lg:text-3xl"> {title}</h4>
               <Chip
