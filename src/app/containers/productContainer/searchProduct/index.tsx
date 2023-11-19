@@ -67,6 +67,7 @@ const SearchForm = (props: Props) => {
   const [searchCategory, setSearchCategory] = React.useState<
     "title" | "brand" | "category"
   >("title");
+  const formRef = React.useRef<HTMLFormElement>(null);
   const dispatch = useAppDispatch();
   const defaultProducts = useSelector(getAllProducts);
   const handleCategory = (event: SelectChangeEvent) => {
@@ -88,6 +89,8 @@ const SearchForm = (props: Props) => {
     dispatch(searchProducts({ filteredProducts }));
   };
   const handleReset = () => {
+    formRef.current!.reset();
+    console.log(defaultProducts);
     dispatch(searchProducts({ filteredProducts: defaultProducts }));
   };
   return (
@@ -101,7 +104,7 @@ const SearchForm = (props: Props) => {
           />
         </Tooltip>
       </div>
-      <div className="gap-2  flex items-center">
+      <div className="gap-2  flex items-center justify-between">
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">
@@ -131,7 +134,7 @@ const SearchForm = (props: Props) => {
             </Select>
           </FormControl>
         </Box>
-        <Box onSubmit={handleSearch} component={"form"}>
+        <Box ref={formRef} onSubmit={handleSearch} component={"form"}>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
