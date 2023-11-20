@@ -8,13 +8,7 @@ A Next.js project demonstrating CRUD operations using data from [dummyjson](http
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Folder Structure](#folder-structure)
-- [Redux State Management](#redux-state-management)
-- [Styling](#styling)
-- [Responsive Design](#responsive-design)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Project Overview
 
