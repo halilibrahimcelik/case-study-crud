@@ -93,6 +93,8 @@ const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
                 required
                 rows={5}
                 cols={0}
+                minLength={5}
+                maxLength={100}
                 name="description"
                 id="input-description"
                 placeholder="Ürün Açıklaması"
@@ -112,15 +114,38 @@ const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
                 variant="standard"
                 defaultValue={selectedProduct?.price}
                 focused={id ? true : false}
+                InputProps={{
+                  inputProps: {
+                    max: 100000,
+                    min: 1,
+                  },
+                }}
+                inputProps={{
+                  max: 100000,
+                  min: 1,
+                }}
               />
             </Box>
-            <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+            <Box
+              title="Ürün  puanlaması 1-5 arası yapılmaktadır."
+              sx={{ display: "flex", alignItems: "flex-end" }}
+            >
               <StarRateIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
               <TextField
                 className="w-full"
                 required
                 name="rating"
                 type="number"
+                InputProps={{
+                  inputProps: {
+                    max: 5,
+                    min: 1,
+                  },
+                }}
+                inputProps={{
+                  max: 5,
+                  min: 1,
+                }}
                 id="input-rating"
                 label="Puan"
                 variant="standard"
