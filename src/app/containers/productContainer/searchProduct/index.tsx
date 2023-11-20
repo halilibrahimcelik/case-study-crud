@@ -90,7 +90,6 @@ const SearchForm = (props: Props) => {
   };
   const handleReset = () => {
     formRef.current!.reset();
-    console.log(defaultProducts);
     dispatch(searchProducts({ filteredProducts: defaultProducts }));
   };
   return (
