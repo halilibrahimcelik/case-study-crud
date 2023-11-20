@@ -1,4 +1,4 @@
-# Project Title
+# Acme Case Study
 
 A Next.js project demonstrating CRUD operations using data from [dummyjson](https://dummyjson.com/docs/products), with styling from Tailwind CSS and Material UI components, and global state management using Redux Toolkit. The project is designed with a fully mobile-responsive layout.
 
