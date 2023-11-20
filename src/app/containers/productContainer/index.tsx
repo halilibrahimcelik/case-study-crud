@@ -127,6 +127,8 @@ const ProductContainer = (props: Props) => {
         handleSubmit={handleUpdate}
         id={id!}
       />
+      <div className="fixed z-[-1]  bg-gradient-to-b from-[#f0eee8c6] from-10% to-[#ccc6f5e2] to-90% top-0 left-0 right-0 bottom-0"></div>
+      <div className="overlay"></div>
     </Wrapper>
   );
 };

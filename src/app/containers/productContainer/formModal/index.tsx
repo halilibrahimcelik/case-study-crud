@@ -94,7 +94,7 @@ const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
                 rows={5}
                 cols={0}
                 minLength={5}
-                maxLength={100}
+                maxLength={200}
                 name="description"
                 id="input-description"
                 placeholder="Ürün Açıklaması"
@@ -140,11 +140,13 @@ const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
                   inputProps: {
                     max: 5,
                     min: 1,
+                    step: 0.01, // Set the step to allow decimal values
                   },
                 }}
                 inputProps={{
                   max: 5,
                   min: 1,
+                  step: 0.01, // Set the step to allow decimal values
                 }}
                 id="input-rating"
                 label="Puan"
