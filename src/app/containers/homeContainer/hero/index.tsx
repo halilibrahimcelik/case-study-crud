@@ -60,7 +60,7 @@ const HeroSection = (props: Props) => {
           height={50}
           objectFit="contain"
           alt="circle-yellow"
-          className="hidden absolute sm:block top-10 right-10 lg:right-[unset]  lg:top-40 lg:left-[-25px] xl:left-[-40px]"
+          className="hidden absolute sm:block top-10 right-10 lg:right-[unset]  lg:top-40 lg:left-[-25px] xl:top-[11rem]  xl:left-[-28px]  3xl:left-[-42px]"
         />
       </motion.div>
       <motion.div
