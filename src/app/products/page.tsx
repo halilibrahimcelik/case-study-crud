@@ -5,7 +5,7 @@ import StoreProvider from "@/store/Provider";
 
 type Props = {};
 export const metadata: Metadata = {
-  title: "Acme | Products",
+  title: "Acme | Ürünler",
   description: "Producst of Acme Company",
 };
 const ProductPage = (props: Props) => {

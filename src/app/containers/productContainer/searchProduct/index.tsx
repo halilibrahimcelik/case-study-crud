@@ -96,7 +96,10 @@ const SearchForm = (props: Props) => {
   return (
     <div className="md:col-span-2  flex flex-col gap-4 relative">
       <div className="absolute md:relative top-[-30px] md:top-0 left-0">
-        <Tooltip title="Kategori seçimize göre arama yapabilrisiniz" arrow>
+        <Tooltip
+          title="Arama yapmak istediğiniz ürünlerin kategorisini seçerek arama yapabilirsiniz."
+          arrow
+        >
           <NewReleasesIcon
             className="cursor-pointer"
             color="primary"
@@ -156,6 +159,7 @@ const SearchForm = (props: Props) => {
           className="w-full  mx-auto sm:m-0   sm:w-fit self-end"
           sx={{ borderRadius: "4px" }}
           clickable
+          title="Filtreyi sıfırla "
           icon={<RestartAltIcon />}
           onClick={handleReset}
           label="Sıfırla"
