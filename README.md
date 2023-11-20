@@ -31,6 +31,7 @@ List the key features of your project, highlighting what sets it apart.
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Material UI](https://material-ui.com/)
 - [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Framer-Motion](https://www.framer.com/)
 
 ## Getting Started
 
