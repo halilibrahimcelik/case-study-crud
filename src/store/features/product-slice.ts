@@ -16,10 +16,7 @@ const initialState: ProductState = {
   allProducts: [],
   notFound: false,
 };
-interface TypeSearch {
-  searchQuery: string;
-  searchCategory: "category" | "price" | "brand";
-}
+
 const URL = `https://dummyjson.com/products`;
 export const fetchProductList = createAsyncThunk(
   "products/fetchProductsList",
