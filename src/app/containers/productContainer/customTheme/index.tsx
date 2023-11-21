@@ -18,6 +18,9 @@ const ProductTheme = ({ children }: Props) => {
             main: "#ffcb13",
           },
         },
+        typography: {
+          fontFamily: "var(--font-nunito)",
+        },
         components: {
           MuiAlert: {
             styleOverrides: {
