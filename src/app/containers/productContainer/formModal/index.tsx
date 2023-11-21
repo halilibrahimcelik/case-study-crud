@@ -42,7 +42,11 @@ const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
     getProductbyId(state, id as number)
   );
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-
+  useEffect(() => {
+    if (textAreaRef.current && selectedProduct?.description !== undefined) {
+      textAreaRef.current.value = selectedProduct.description;
+    }
+  }, [selectedProduct?.description]);
   return (
     <Modal
       keepMounted
@@ -186,7 +190,7 @@ const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
             </Box>
             <CustomButon
               type="submit"
-              text="Ekle"
+              text={id ? "Güncelle" : "Ekle"}
               color="inherit"
               variant="outlined"
             />
