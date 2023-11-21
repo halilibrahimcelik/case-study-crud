@@ -41,13 +41,8 @@ const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
   const selectedProduct = useSelector((state: { products: ProductState }) =>
     getProductbyId(state, id as number)
   );
-
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  useEffect(() => {
-    if (textAreaRef.current && selectedProduct?.description !== undefined) {
-      textAreaRef.current.value = selectedProduct.description;
-    }
-  }, [selectedProduct?.description]);
+
   return (
     <Modal
       keepMounted
@@ -75,12 +70,18 @@ const FormModal = ({ handleSubmit, open, handleClose, id }: Props) => {
               <TextField
                 className="w-full p-2"
                 required
+                inputRef={(input) => {
+                  if (input != null) {
+                    input.focus();
+                  }
+                }}
+                autoFocus={true}
                 name="title"
                 id="input-title"
                 label="Ürün Adı"
                 variant="standard"
                 defaultValue={selectedProduct?.title}
-                focused={id ? true : false}
+                //  focused={id ? true : false}
               />
             </Box>
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
