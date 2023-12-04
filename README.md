@@ -12,7 +12,9 @@ A Next.js project demonstrating CRUD operations using data from [dummyjson](http
 
 ## Project Overview
 
-This Next.js project allows users to interact with a product list, enabling them to perform CRUD operations such as adding new products. The application provides a user-friendly interface for managing products, offering features like filtering and searching based on product title, brand, and category. Whether you want to add the latest products to your list or find specific items quickly, this project simplifies the process with a seamless user experience.
+This Next.js project allows users to interact with a product list, enabling them to perform CRUD operations such as adding new products. The application provides a user-friendly interface for managing products, offering features like filtering and searching based on product title, brand, and category. 
+
+Whether you want to add the latest products to your list or find specific items quickly, this project simplifies the process with a seamless user experience.
 
 ## Features
 
